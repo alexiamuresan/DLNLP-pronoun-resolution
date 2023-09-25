@@ -1,0 +1,9 @@
+# files
+
+
+
+# folders
+__pycache__/
+data/
+.vscode/
+gap-coreference/
