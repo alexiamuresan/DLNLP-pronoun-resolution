@@ -1,0 +1,8 @@
+numpy
+pandas
+tqdm
+ipykernel
+torch
+transformers
+pytorch-lightning
+tensorboard
