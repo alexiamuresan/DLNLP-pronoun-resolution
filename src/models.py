@@ -43,25 +43,25 @@ class GAPCorefClassifier(pl.LightningModule):
         self.acc = torchmetrics.Accuracy(task='multiclass', num_classes=num_classes, average='macro')
         self.f1 = torchmetrics.F1Score(task='multiclass', num_classes=num_classes, average='macro')
 
-    def forward(self, text, pronoun, a, b):
-        # Combine the text, pronoun, and referents A and B as a single input sequence.
-        inputs = self.tokenizer(
-            [f"{text} [SEP] {pronoun} [SEP] {a} [SEP] {b}" for text, pronoun, a, b in zip(text, pronoun, a, b)],
-            padding=True,
-            truncation=True,
-            max_length=512,
-            return_tensors="pt"
-        )
-        # Move inputs to the same device as the model
-        inputs = {key: val.to(self.device) for key, val in inputs.items()}
-        outputs = self.model(**inputs)
+    def forward(self, batch):
+        # Extract tokenized inputs from batch
+        input_ids = batch['input_ids'].to(self.device)
+        attention_mask = batch['attention_mask'].to(self.device)
+        
+        # Obtain model outputs
+        outputs = self.model(input_ids, attention_mask=attention_mask)
         pooled_output = outputs.last_hidden_state[:, 0]
+        
+        # Pass through the final classification layer
         logits = self.fc(pooled_output)
+        
         return logits
-    
+
     def step(self, batch):
-        text, pronoun, a, b, labels = batch['text'], batch['pronoun'], batch['a'], batch['b'], batch['label']
-        logits = self.forward(text, pronoun, a, b)
+        labels = batch['label'].to(self.device)
+        logits = self.forward(batch)
+        
+        # Compute loss
         loss = self.loss(logits, labels)
         return loss, logits, labels
 
