@@ -6,3 +6,4 @@ torch
 transformers
 pytorch-lightning
 tensorboard
+python-dotenv
