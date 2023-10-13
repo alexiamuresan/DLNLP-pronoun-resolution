@@ -7,3 +7,8 @@ transformers
 pytorch-lightning
 tensorboard
 python-dotenv
+tensorflow
+nltk
+scikit-learn
+wandb
+fastcoref

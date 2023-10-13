@@ -1,6 +1,7 @@
 import pandas as pd
 from pathlib import Path
 from collections import Counter
+import json
 import torch
 from torch.utils.data import Dataset, DataLoader
 from pytorch_lightning import LightningDataModule
@@ -97,3 +98,72 @@ def get_value_counts(data_module):
         print(split)
         for label, count in label_counts.items():
             print(f"{label}: {count}")
+            
+def get_span_gap(entity, start_offset):
+    """
+    Get the span of the entity in the GAP dataset.
+
+    Parameters:
+    - entity (str): The entity string.
+    - start_offset (int): The character offset of the entity in the text.
+
+    Returns:
+    - tuple: (start_offset, end_offset)
+    """
+    return (start_offset, start_offset + len(entity))
+
+def convert_gap_to_jsonlines(gap_data_path, output_jsonl_path, num_samples=None):
+    """
+    Convert GAP dataset to jsonlines format suitable for training with FCoref.
+
+    Parameters:
+    - gap_data_path (str): Path to the GAP dataset in .tsv format.
+    - output_jsonl_path (str): Path to save the output .jsonlines file.
+    - num_samples (int, optional): Number of samples to convert. If None, convert all.
+
+    Outputs:
+    - Writes a .jsonlines file at output_jsonl_path.
+    """
+    # load gap data
+    df_gap = pd.read_csv(gap_data_path, sep='\t')
+    
+    # optionally, sample a subset of the data
+    if num_samples is not None:
+        df_gap = df_gap.sample(num_samples)
+    
+    # open output file
+    with open(output_jsonl_path, 'w', encoding='utf-8') as f_out:
+        # iterate through each row in the dataframe
+        for _, row in df_gap.iterrows():
+            # extract relevant information
+            text = row['Text']
+            a_coref = row['A-coref']
+            b_coref = row['B-coref']
+            
+            # get spans using the utility function
+            a_span = get_span_gap(row['A'], row['A-offset'])
+            b_span = get_span_gap(row['B'], row['B-offset'])
+            pronoun_span = get_span_gap(row['Pronoun'], row['Pronoun-offset'])
+            
+            # create clusters and cluster strings
+            clusters = []
+            clusters_strings = []
+            if a_coref:
+                clusters = [[a_span, pronoun_span], [b_span]]
+                clusters_strings = [[row['A'], row['Pronoun']], [row['B']]]
+            elif b_coref:
+                clusters = [[b_span, pronoun_span], [a_span]]
+                clusters_strings = [[row['B'], row['Pronoun']], [row['A']]]
+            else:
+                clusters = [[a_span], [b_span], [pronoun_span]]
+                clusters_strings = [[row['A']], [row['B']], [row['Pronoun']]]
+            
+            # create json object
+            json_obj = {
+                "text": text,
+                "clusters": clusters,
+                "clusters_strings": clusters_strings
+            }
+            
+            # write to file
+            f_out.write(json.dumps(json_obj) + '\n')

@@ -9,3 +9,5 @@ data/
 gap-coreference/
 lightning_logs/
 model_ckpts/
+wandb/
+cache/
