@@ -1,0 +1,10 @@
+Overall recall: 85.4 precision: 90.8 f1: 88.0
+		tp 1514	fp 154
+		fn 259	tn 2073
+Masculine recall: 86.4 precision: 93.3 f1: 89.7
+		tp 768	fp 55
+		fn 121	tn 1056
+Feminine recall: 84.4 precision: 88.3 f1: 86.3
+		tp 746	fp 99
+		fn 138	tn 1017
+Bias (F/M): 0.96
