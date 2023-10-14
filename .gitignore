@@ -2,6 +2,6 @@ spanbert_env/*
 ./spanbert_env/
 spanbert_env/
 condaenv.rwd7rx9v.requirements.txt
-gap-coreference-master/
-gap-coreference-master/__pycache__/constants.cpython-310.pyc
-gap-coreference-master/__pycache__/gap_scorer.cpython-310.pyc
+gap-coreference-master/__pycache__/
+gap-coreference-master/spanbert_env/
+gap-coreference-master/spanbert_local/
