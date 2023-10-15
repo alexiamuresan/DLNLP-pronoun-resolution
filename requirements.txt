@@ -1,0 +1,14 @@
+pandas
+tqdm
+ipykernel
+torch
+transformers
+pytorch-lightning
+tensorboard
+python-dotenv
+nltk
+scikit-learn
+wandb
+fastcoref
+allennlp
+allennlp-models

@@ -1,0 +1,19 @@
+# files
+condaenv.rwd7rx9v.requirements.txt
+.env
+
+
+# folders
+__pycache__/
+.vscode/
+gap-coreference/
+lightning_logs/
+model_ckpts/
+wandb/
+cache/
+spanbert_env/*
+./spanbert_env/
+spanbert_env/
+gap-coreference-master/__pycache__/
+gap-coreference-master/spanbert_env/
+gap-coreference-master/spanbert_local/
