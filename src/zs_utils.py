@@ -3,8 +3,6 @@ import time
 import requests
 import pandas as pd
 from tqdm import tqdm
-from dotenv import load_dotenv
-from .data_utils import insert_markers
    
 class GPTHandler:
     '''
