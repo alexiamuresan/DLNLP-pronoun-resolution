@@ -1,4 +1,5 @@
 # files
+condaenv.rwd7rx9v.requirements.txt
 
 
 
@@ -11,3 +12,9 @@ lightning_logs/
 model_ckpts/
 wandb/
 cache/
+spanbert_env/*
+./spanbert_env/
+spanbert_env/
+gap-coreference-master/__pycache__/
+gap-coreference-master/spanbert_env/
+gap-coreference-master/spanbert_local/

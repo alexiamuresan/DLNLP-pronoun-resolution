@@ -1,0 +1,4 @@
+gap-test-gn.tsv Global B3 Scores:
+Precision: 0.64
+Recall: 0.44
+F1 Score: 0.50
