@@ -108,7 +108,7 @@ class GAPCorefClassifier(pl.LightningModule):
         return optimizer
     
 class FCorefClassifier:
-    def __init__(self, model_name='fcoref', data_path='data/gap/gap-test.tsv', num_samples=None):
+    def __init__(self, model_name='lmcoref', data_path='data/gap/gap-test.tsv', num_samples=None):
         """
         Initialize the FCorefClassifier.
 
@@ -153,16 +153,17 @@ class FCorefClassifier:
             df_gap = df_gap.sample(self.num_samples)
         return df_gap
     
-    def pred_cr_clusters(self, verbose=False, **kwargs):
+    def pred_cr_clusters(self, output_path=None, verbose=False):
         """
         Predict coreference clusters for the sample texts.
         Parameters:
+        - output_path (str or None): Path to save the predicted clusters.
         - verbose (bool): Whether to print verbose output.
         Returns:
         - List: Predicted coreference clusters for each text.
         """
         texts = self.samples['Text'].tolist()
-        cluster_preds = self.model.predict(texts, **kwargs)
+        cluster_preds = self.model.predict(texts, output_file=output_path)
         
         # print verbose output
         if verbose:
