@@ -10,3 +10,5 @@ nltk
 scikit-learn
 wandb
 fastcoref
+allennlp
+allennlp-models

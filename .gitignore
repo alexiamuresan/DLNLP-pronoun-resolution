@@ -5,7 +5,6 @@ condaenv.rwd7rx9v.requirements.txt
 
 # folders
 __pycache__/
-data/
 .vscode/
 gap-coreference/
 lightning_logs/

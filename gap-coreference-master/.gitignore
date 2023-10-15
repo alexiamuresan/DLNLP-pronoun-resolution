@@ -1,7 +1,0 @@
-spanbert_env/*
-./spanbert_env/
-spanbert_env/
-condaenv.rwd7rx9v.requirements.txt
-gap-coreference-master/__pycache__/
-gap-coreference-master/spanbert_env/
-gap-coreference-master/spanbert_local/
