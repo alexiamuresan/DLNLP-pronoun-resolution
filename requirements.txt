@@ -12,3 +12,8 @@ wandb
 fastcoref
 allennlp
 allennlp-models
+openai
+pandas
+re
+google.colab
+import json
