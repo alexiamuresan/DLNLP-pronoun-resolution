@@ -22,11 +22,15 @@ We additionally include the modified version of the the gap test dataset where w
 ## Creating the ablated dataset
 To create the ablated version of the GAP test dataset, which we will use for our experiments, run the cells in the notebook `modify-gap.ipynb`. The notebook will create the file `data/gap/gap-test-gn.tsv` which contains the ablated version of the GAP test dataset.
 
-## Spanbert Evaluation in GAP
+## Spanbert Evaluation in GAP(nb)
 
-Here is the code, data and results for evaluating Spanbert in GAP data and NB GAP. \\
+`spanbert_gap_eval.ipynb` contains the code, data and results for evaluating Spanbert in GAP data and NB GAP. \\
 
 Note: Cuda hast to be lower than 12 to work with allennlp.
+
+## LLM Evaluation for GAP(nb)
+
+The `Zero_shot_LLMs.ipynb` notebook can be used to evaluate LLMs like GPT-3 on the GAP and modified GAP (NeutralGAP) datasets using zero-shot prompting.
 
 
 `spanbert_gap_eval.ipynb` is used to load the spanbert model or download it if its missing. We do some data processing, generate predictions for GAP data and use the official scorer from GAP repository to compute F1, accuracy and use our own custom function for scoring B3.
